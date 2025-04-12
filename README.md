@@ -6,4 +6,4 @@ This is a way to learn using Flask for backend and connecting it with a React fr
 
 For Mac/Unix create a virtual environment using venv and then cd into "/backend" then run ```python3 -m pip install -r requirements.txt``` if using windows create the same virtual environment then run ```py -m pip install -r requirements.txt```
 
-For the React/Vite side of things simply run ```npm install``` when first cloning the project
+For the React/Vite side of things simply cd into /frontend/sight and then run ```npm install``` when first cloning the project.
