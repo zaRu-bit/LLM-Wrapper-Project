@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import MessageBubble from "../components/MessageBubble";
 
 export default function Chat() {
   const navigate = useNavigate();
@@ -33,6 +34,11 @@ export default function Chat() {
     localStorage.removeItem("user");
     navigate("/login");
   };
+  
+  const messages = [
+    { id: 1, text: "Hello! How can I help you today?", sender: "ai" },
+    { id: 2, text: "I need help with my code.", sender: "user" },
+  ];
 
   return (
     <div className="min-h-screen flex bg-gray-50 text-black dark:bg-bg-dark dark:text-white transition-colors duration-200">
@@ -67,7 +73,7 @@ export default function Chat() {
               <div className="absolute right-0 mt-2 w-32 bg-white dark:bg-[#2b2d30] border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg z-10">
                 <button
                   onClick={handleLogout}
-                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-t-lg font-mono"
+                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-t-lg font-mono cursor-pointer"
                 >
                   Logout
                 </button>
@@ -78,12 +84,9 @@ export default function Chat() {
 
         {/* Messages */}
         <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-gray-100 dark:bg-[#2b2d30] transition-colors duration-200">
-          <div className="bg-gray-200 dark:bg-gray-700 p-4 rounded-lg w-fit max-w-lg shadow-md shadow-gray-700/40 font-mono">
-            Hello! How can I help you today?
-          </div>
-          <div className="bg-primary p-4 rounded-lg w-fit max-w-lg self-end text-white shadow-md shadow-primary/40 font-mono">
-            I need help with my code.
-          </div>
+          {messages.map((msg) => (
+            <MessageBubble key={msg.id} text={msg.text} sender={msg.sender} />
+          ))}
         </div>
 
         {/* Input */}
