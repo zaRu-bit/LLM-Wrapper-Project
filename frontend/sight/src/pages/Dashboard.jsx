@@ -1,2 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+export default function Dashboard() {
+  return (
+    <div className="p-4">
+      <h1 className="text-xl font-bold">Dashboard</h1>
+    </div>
+  );
+}
