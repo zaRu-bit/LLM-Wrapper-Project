@@ -1,3 +1,2 @@
-export default function Dashboard() {
-    return <h1>Dashboard (after login)</h1>;
-  }
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
