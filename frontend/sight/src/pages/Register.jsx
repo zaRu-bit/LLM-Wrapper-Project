@@ -103,7 +103,7 @@ export default function Register() {
                 id="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="••••••••"
+                placeholder="•••••••••"
                 required
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg 
                   focus:outline-none focus:ring-indigo-400 focus:border-indigo-400 block w-full p-2.5 

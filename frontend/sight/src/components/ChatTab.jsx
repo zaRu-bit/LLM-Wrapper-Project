@@ -22,7 +22,7 @@ export default function ChatTab({ label, onDelete, onRename }) {
             if (e.key === "Enter") handleRename();
           }}
           autoFocus
-          className="flex-1 mr-2 bg-transparent text-black dark:text-white outline-none hover:bg-gray-700/50"
+          className="flex-1 mr-2 bg-gray-700/50 text-black dark:text-white outline-none hover:bg-gray-700/50"
         />
       ) : (
         <span
