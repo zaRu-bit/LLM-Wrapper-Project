@@ -8,3 +8,7 @@
   --color-background: #191b1c;
   --font-mono: "JetBrains Mono", monospace;
 }
+
+body {
+  @apply text-sm font-mono;
+}

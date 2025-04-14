@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import MessageBubble from "../components/MessageBubble";
+import ChatTab from "../components/ChatTab";
 
 export default function Chat() {
   const navigate = useNavigate();
@@ -39,20 +40,61 @@ export default function Chat() {
     { id: 1, text: "Hello! How can I help you today?", sender: "ai" },
     { id: 2, text: "I need help with my code.", sender: "user" },
   ];
+  const [chats, setChats] = useState([
+    { id: 1, label: "New Chat 1" },
+    { id: 2, label: "New Chat 2" },
+  ]);
+  
+  const handleAddChat = () => {
+    if (chats.length < 10) {
+      const newId = Date.now(); // Unique id
+      setChats([...chats, { id: newId, label: `New Chat ${chats.length + 1}` }]);
+    }
+  };
+  
+  const handleDeleteChat = (id) => {
+    setChats(chats.filter((chat) => chat.id !== id));
+  };
+  const handleRenameChat = (id, newLabel) => {
+    setChats((prev) =>
+      prev.map((chat) =>
+        chat.id === id ? { ...chat, label: newLabel } : chat
+      )
+    );
+  };
 
   return (
     <div className="min-h-screen flex bg-gray-50 text-black dark:bg-bg-dark dark:text-white transition-colors duration-200">
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-gray-300 dark:bg-[#222325] dark:border-[#222325] p-4 flex flex-col">
         <h2 className="text-lg font-bold mb-4 dark:text-white font-mono">Chats</h2>
+
+        {/* Chat list */}
         <ul className="space-y-2 overflow-y-auto flex-1">
-          <li className="bg-primary text-white rounded-md px-3 py-2 cursor-pointer hover:bg-violet-500 transition font-mono">
-            New Chat
-          </li>
-          <li className="bg-gray-200 dark:bg-gray-700 rounded-md px-3 py-2 cursor-pointer hover:bg-violet-500 transition dark:hover:bg-violet-500 font-mono">
-            Chat with AI
-          </li>
+          {chats.map((chat) => (
+            <ChatTab
+              key={chat.id}
+              label={chat.label}
+              onDelete={() => handleDeleteChat(chat.id)}
+              onRename={(newLabel) => handleRenameChat(chat.id, newLabel)}
+            />
+          ))}
         </ul>
+
+        {/* Add new chat */}
+        <button
+          onClick={handleAddChat}
+          disabled={chats.length >= 10}
+          title={chats.length >= 10 ? "Max of 10 chats" : ""}
+          className={`mt-4 px-3 py-2 rounded-md text-sm font-mono transition active:scale-95 transition-transform duration-100 ease-in-out
+            ${
+              chats.length >= 10
+                ? "bg-gray-400 text-white cursor-not-allowed"
+                : "bg-primary text-white hover:bg-violet-500 cursor-pointer"
+            }`}
+        >
+          + New Chat
+        </button>
       </aside>
 
       {/* Main Area */}
@@ -63,7 +105,8 @@ export default function Chat() {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="w-10 h-10 rounded-full bg-violet-500 text-white flex items-center justify-center font-bold hover:scale-105 transition cursor-pointer"
+              className="w-10 h-10 rounded-full bg-violet-500 text-white flex items-center justify-center font-bold hover:scale-105 transition cursor-pointer text-2xl font-mono
+              active:scale-95 transition-transform duration-100 ease-in-out"
               title={username}
             >
               {initial}
