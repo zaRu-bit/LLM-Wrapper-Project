@@ -26,7 +26,7 @@ export default function ChatTab({ label, onDelete, onRename }) {
         />
       ) : (
         <span
-          className="flex-1 truncate hover:bg-gray-700/50 transition"
+          className="inline-block rounded px-1 hover:bg-gray-700/50 transition"
           onClick={() => setIsEditing(true)}
           title="Click to rename"
         >
