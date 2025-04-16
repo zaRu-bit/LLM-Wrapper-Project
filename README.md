@@ -10,3 +10,5 @@ To start the backend run ```py app.py``` in windows to start or in Mac/Unix run 
 
 For the React/Vite side of things simply cd into /frontend/sight and then run ```npm install``` when first cloning the project.
 To start the frontend run ```npm run dev``` to start it.
+
+You'll need to create a ```.env``` file to store your own Deepseek or OpenAI API key. Put this file in "/backend' and place ```DEEPSEEK_API_KEY=Your API Key```
